@@ -1,0 +1,23 @@
+{% extends 'tronco.html' %}
+
+{% block titulo %} Blog | Agregar Comentarios {% endblock %}
+
+{% block contenido %}
+    
+{% if user.is_authenticated %}
+<h1>Agregar Comentarios</h1>
+
+    <div class="form-group">
+        <form method="POST">{% csrf_token %}
+            <br/>
+                {{ form.as_p }}
+            <br/>
+            <button class="btn btn-secondary">Agregar</button>
+    </div>
+{% else %}
+
+    <h2>Debes ingresar antes de poder crear nuevos Comentarios.</h2>
+    
+{% endif %}
+
+{% endblock %}

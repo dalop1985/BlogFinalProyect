@@ -1,0 +1,23 @@
+{% extends 'tronco.html' %}
+
+{% block contenido %}
+    
+<div class="card mb-3" style="max-width: 540px;">
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img src="../imagenes/perfil/pepe.png" width=120 height=120>
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">ISC. David José de Jesús López Chan</h5>
+          <p class="card-text">Soy Ingeniero en Sistemas desde el año 2008, y por he estado trabajando en varios lugares, lamentablemente no como programador, si no más bien como Administrador, sin embargo, programar y llegar a ser un Data Analyst siempre ha sido una de mis metas y quiero lograrlo. Se que puedo hacerlo con Python, ya que tiene muchas de las herramientas que facilitan el trabajo, y espero no acabar con esto, si no que quiero mejorar las técnicas y saber más.</p>
+          <p class="card-text"><small class="text-muted">Creado el 10 de Enero de 2023</small></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<br/><br/>
+<a href="{% url 'inicio' %}" class="btn btn-secondary"> Regresar </a>
+
+{% endblock %}

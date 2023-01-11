@@ -1,0 +1,24 @@
+{% extends 'tronco.html' %}
+
+{% block titulo %} Edición de Perfil!! {% endblock %}
+
+{% block contenido %}
+    
+<h1>Edición de Perfil!!</h1>
+<br/>
+    {% if user.perfil.biogra %}
+        {{ user.perfil.biogra }}
+    {% else %}
+        <small> No hay biografía del perfil </small>
+    {% endif %}
+<br/>
+<div class="form-group">
+    <form method="POST">{% csrf_token %}
+        <br/>   
+        {{ form.as_p }}
+        <br/>
+        <button class="btn btn-secondary">Guardar</button>
+</div>
+
+
+{% endblock %}

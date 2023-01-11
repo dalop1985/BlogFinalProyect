@@ -1,0 +1,92 @@
+{% extends 'tronco.html' %}
+
+{% block titulo %}
+{{ post.titulo_tag }}
+{% endblock %}
+
+{% block contenido %}
+
+    <h1>{{ post.titulo }}</h1>
+    <small>Escrito por: {{ post.autor.first_name }} {{ post.autor.last_name }} - {{ post.fecha_creacion }}  
+        {% if user.is_authenticated %}
+            {% if user.id == post.autor.id %}
+            | <small><a href="{% url 'actualizar' post.pk %}"> Editar </a></small> | <small><a href="{% url 'borrar' post.pk %}"> Borrar </a></small> 
+            {% endif %}
+        {% endif %}
+    <hr>
+    <small>Categoría: <strong>{{ post.categoria }}</strong></small>
+    <br/>
+    <p>{{ post.cuerpo|safe }}</p>
+    <br/><br/>
+    <a href="{% url 'inicio' %}" class="btn btn-secondary"> Regresar </a>
+
+    <br/>
+    <hr>
+    <br/>
+    <form action="{% url 'megusta' post.pk %}" method='POST'>{% csrf_token %}
+    {% if user.is_authenticated %}
+        {% if megust %}
+            <button type='submit' name='idpost' value='{{ post.id }}' class="btn btn-danger btn-sm">No Me Gusta</button>
+        {% else %}
+            <button type='submit' name='idpost' value='{{ post.id }}' class="btn btn-primary btn-sm">Me Gusta</button>
+        {% endif %}
+    {% else %}
+        <a href="{% url 'login' %}"><small>Ingresar para Usar</small></a>
+    {% endif %}
+            - {{ totalmegusta }} Me Gusta!
+    </form>
+<br/>
+<div class="card mb-3">
+    <div class="row no-gutters">
+    {% if post.autor.perfil.avatar %}  
+      <div class="col-md-2">
+        <img src="{{ post.autor.perfil.avatar.url }}" class="card-img" width=120 height=180>
+      </div>
+    {% else %}
+      <div class="col-md-2">
+        <img src="../imagenes/perfil/AvatarDefault.jpg" class="card-img" width=120 height=180>
+      </div>
+    {% endif %}
+
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{ post.autor.first_name }} {{ post.autor.last_name }} </h5>
+          <p class="small text-muted">
+                | <a href="{% url 'vistaPerfil' post.autor.id %}">Perfil</a>
+             {% if post.autor.perfil.urlpersonal %}
+                | <a href="{{ post.autor.perfil.urlpersonal }}">WebSite</a> | 
+             {% else %}
+                | <a href="#">WebSite</a> |
+             {% endif %}
+             {% if post.autor.perfil.urlfacebook %}
+               <a href="{{ post.autor.perfil.urlfacebook }}">Facebook</a> | 
+             {% else %}
+               <a href="#}">Facebook</a> | 
+             {% endif %}
+             {% if post.autor.perfil.urltwitter %}
+               <a href="{{ post.autor.perfil.urltwitter }}">Twitter</a> |
+             {% else %}
+               <a href="#">Twitter</a> |
+             {% endif %}
+          </p>
+          <p class="card-text">{{ post.autor.perfil.biogra|slice:":300" }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br/>
+  <h2><strong>Comentarios!!</strong></h2>
+  <a href ="{% url 'nuevoComentario' post.pk %}" class="btn btn-info"> Agregar Comentario </a>
+  {% if not post.Comentarios.all %}
+    No hay comentarios aún
+  {% else %}
+    <hr>  
+    {% for c in post.Comentarios.all %}
+      <strong>{{ c.nombre }} - {{ c.fcomentario }}</strong><br/>
+      {{ c.comentario }}<br/><hr>
+    {% endfor %}
+  {% endif %}
+  <br/>
+  <br/>
+  <hr>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'tronco.html' %}
+
+{% block titulo %} Crear nueva Categoria! {% endblock %}
+
+{% block contenido %}
+    
+{% if user.is_authenticated %}
+<h1>Ingresa una nueva Categoria</h1>
+    <div class="form-group">
+        <form method="POST">{% csrf_token %}
+            <br/>   
+            {{ form.as_p }}
+            <br/>
+            <button class="btn btn-secondary">Crear</button>
+    </div>
+{% else %}
+
+    <h2>Debes ingresar antes de poder crear nuevas Categorias.</h2>
+    
+{% endif %}
+
+{% endblock %}

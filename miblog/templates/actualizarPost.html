@@ -1,0 +1,31 @@
+{% extends 'tronco.html' %}
+
+{% block titulo %} Edición de Post! {% endblock %}
+
+{% block contenido %}
+    
+{% if user.is_authenticated %}
+    {% if user.id == post.autor.id %}
+        <h1>Editar Post</h1>
+
+        <div class="form-group">
+            <form method="POST">{% csrf_token %}
+                <br/>   
+                {{ form.media }} <!-- Este es el que sirve para convertir a Texto Enriquecido el campo del TextArea-->
+                {{ form.as_p }}
+                <br/>
+                <button class="btn btn-secondary">Guardar</button>
+        </div>
+    {% else %}
+
+        <h2>Debes ingresar con el usuario que creo el POST antes de poder editar.</h2>
+        
+    {% endif %}
+{% else %}
+
+<h2>Debes ingresar antes de poder editar.</h2>
+
+{% endif %}
+
+
+{% endblock %}

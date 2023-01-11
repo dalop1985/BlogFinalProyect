@@ -1,0 +1,18 @@
+{% extends 'tronco.html' %}
+
+{% block titulo %} Registro de Usuarios! {% endblock %}
+
+{% block contenido %}
+    
+<h1>Registrate!</h1>
+
+<div class="form-group">
+    <form method="POST">{% csrf_token %}
+        <br/>   
+        {{ form.as_p }}
+        <br/>
+        <button class="btn btn-secondary">Guardar</button>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,27 @@
+{% extends 'tronco.html' %}
+
+{% block titulo %} Blog | Cambio de Contraseña {% endblock %}
+
+{% block contenido %}
+    
+<h1>Cambio de Contraseña</h1>
+
+<h3>* Recomendaciones *</h3>
+<br/>
+<ul>
+    <li>Su contraseña no puede ser muy similar a su otra información personal.</li>
+    <li>Su contraseña es muy corta. Debe contener al menos 8 caracteres.</li>
+    <li>Su contraseña no puede ser una contraseña de uso común.</li>
+    <li>Su contraseña no puede ser completamente numérica.</li>
+</ul>
+
+<div class="form-group">
+    <form method="POST">{% csrf_token %}
+        <br/>   
+        {{ form.as_p }}
+        <br/>
+        <button class="btn btn-secondary">Guardar</button>
+</div>
+
+
+{% endblock %}

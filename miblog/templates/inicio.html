@@ -1,0 +1,23 @@
+{% extends 'tronco.html' %}
+
+{% block contenido %}
+    
+<h1>Listado de Post</h1>
+
+<ul>
+{% for post in object_list %} <!-- slugify es para reemplazar textos, en este caso quitaremos los espacios en los títulos -->
+    <small><strong>{{ post.fecha_creacion }} - <a href="{% url 'categoria' post.categoria|slugify %}">{{ post.categoria|title }}</a></strong></small>
+    <li><a href="{% url 'detalle' post.pk %}">{{ post.titulo}} </a> | {{ post.autor.first_name }} {{ post.autor.last_name }} 
+        {% if user.is_authenticated %}
+            {% if user.id == post.autor.id %} 
+            | <small><a href="{% url 'actualizar' post.pk %}"> Editar </a></small> | <small><a href="{% url 'borrar' post.pk %}"> Borrar </a></small> 
+            {% endif %}
+        {% endif %} 
+        <br/>
+    <small>Resumen: *{{ post.resumen|slice:":200"|safe }}*</small>
+    <!--{{ post.cuerpo|slice:":200"|safe }}-->
+    </li>
+{% endfor %} 
+</ul>
+
+{% endblock %}

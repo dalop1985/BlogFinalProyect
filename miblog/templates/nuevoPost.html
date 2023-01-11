@@ -1,0 +1,24 @@
+{% extends 'tronco.html' %}
+
+{% block titulo %} Crear nuevo Post! {% endblock %}
+
+{% block contenido %}
+    
+{% if user.is_authenticated %}
+<h1>Nuevo Post</h1>
+
+    <div class="form-group">
+        <form method="POST">{% csrf_token %}
+            <br/>
+            {{ form.media }}   
+            {{ form.as_p }}
+            <br/>
+            <button class="btn btn-secondary">Postear</button>
+    </div>
+{% else %}
+
+    <h2>Debes ingresar antes de poder crear nuevos Post's.</h2>
+    
+{% endif %}
+
+{% endblock %}

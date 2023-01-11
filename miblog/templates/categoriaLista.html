@@ -1,0 +1,15 @@
+{% extends 'tronco.html' %}
+
+{% block titulo %}
+Categorías del Blog
+{% endblock %}
+
+<h1>Categorías del Blog</h1>
+
+{% block contenido %}
+
+    {% for i in cmlista %}
+        <h4><a class="dropdown-item" href="{% url 'categoria' i|slugify %}">{{ i|title }}</a></h4>
+    {% endfor %}
+
+{% endblock %}

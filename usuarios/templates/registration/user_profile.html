@@ -1,0 +1,48 @@
+{% extends 'tronco.html' %}
+
+{% block contenido %}
+    
+<h1>Vista del Perfil del Usuario: {{ perfilUsuario }}</h1>
+
+<div class="card mb-3">
+    <div class="row no-gutters">
+    {% if perfilUsuario.avatar %}  
+      <div class="col-md-2">
+        <img src="{{ perfilUsuario.avatar.url }}" class="card-img" width=120 height=180>
+      </div>
+    {% else %}
+      <div class="col-md-2">
+        <img src="../imagenes/perfil/AvatarDefault.jpg" class="card-img" width=120 height=180>
+      </div>
+    {% endif %}
+
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{ perfilUsuario.user.first_name }} {{ perfilUsuario.user.last_name }} </h5>
+          <p class="small text-muted">
+               
+             {% if post.autor.perfil.urlpersonal %}
+                | <a href="{{ perfilUsuario.urlpersonal }}">WebSite</a> | 
+             {% else %}
+                | <a href="#">WebSite</a> |
+             {% endif %}
+             {% if perfilUsuario.urlfacebook %}
+               <a href="{{ perfilUsuario.urlfacebook }}">Facebook</a> | 
+             {% else %}
+               <a href="#}">Facebook</a> | 
+             {% endif %}
+             {% if perfilUsuario.urltwitter %}
+               <a href="{{ perfilUsuario.urltwitter }}">Twitter</a> |
+             {% else %}
+               <a href="#">Twitter</a> |
+             {% endif %}
+          </p>
+          <p class="card-text">{{ perfilUsuario.biogra|slice:":300" }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br/><br/>
+    <a href="{% url 'inicio' %}" class="btn btn-secondary"> Regresar </a>
+
+{% endblock %}

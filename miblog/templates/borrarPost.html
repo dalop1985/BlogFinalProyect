@@ -1,0 +1,27 @@
+{% extends 'tronco.html' %}
+
+{% block titulo %} Eliminar Post! {% endblock %}
+
+{% block contenido %}
+
+{% if user.is_authenticated %}
+    {% if user.id == post.autor.id %}
+        <h1>Sección para Borrar Post! </h1>
+        <br/>
+        <h3>Eliminar el Post: {{ post.titulo }}</h3>
+        <br/>
+        <div class="form-group">
+            <form method="POST">{% csrf_token %}
+                <strong>Estas Seguro de querer Borrar el Post?</strong><br/> <br/>
+                <button class="btn btn-secondary">Borrar</button>
+        </div>
+    {% else %}
+        <h2>Acción no permitida.</h2>
+    {% endif %}
+{% else %}
+
+    <h2>Acción no permitida.</h2>
+    
+{% endif %}
+
+{% endblock %}

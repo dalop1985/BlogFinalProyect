@@ -1,0 +1,20 @@
+{% extends 'tronco.html' %}
+
+{% block contenido %}
+    
+{% if postcategorias %}
+    <h1>Categoria: {{ cate }}</h1>
+
+        {% for post in postcategorias %}
+            <small>{{ post.fecha_creacion }}</small>
+            <li><a href="{% url 'detalle' post.pk %}">{{ post.titulo}} </a> | {{ post.autor.first_name }} {{ post.autor.last_name }} | {% if user.is_authenticated %} <small><a href="{% url 'actualizar' post.pk %}"> Editar </a></small> | <small><a href="{% url 'borrar' post.pk %}"> Borrar </a></small> {% endif %} <br/>
+            {{ post.cuerpo|slice:":200"|safe }}</li>
+        {% endfor %}
+{% else %}
+    <h2> La Categoría Seleccionada no existe, favor de verificar, Gracias!!! </h2>
+{% endif %}
+
+<br/><br/>
+<a href="{% url 'inicio' %}" class="btn btn-secondary"> Regresar </a>
+
+{% endblock %}
