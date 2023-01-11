@@ -51,6 +51,7 @@ class nuevoPost(CreateView):
     template_name = 'nuevoPost.html'
     #fields = '__all__'
     #fields = ('titulo','cuerpo','titulo_tag')
+    success_url = reverse_lazy('inicio')
 
 class nuevaCategoria(CreateView):
     model = Categoria
